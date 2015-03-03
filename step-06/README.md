@@ -39,7 +39,7 @@ Then we can rewrite the table initialization in `BeerInitialize.java`:
 		 ...
 		 */
 		 
-		stmt.executeUpdate("CREATE TABLE beers ( id varchar(50), name varchar(100), image varchar(100), description varchar(1000), alcohol decimal(3,1)"
+		stmt.executeUpdate("CREATE TABLE beers ( id varchar(50), name varchar(100), image varchar(100), description varchar(1000), alcohol decimal(3,1),"
 					+"availability varchar(100), brewery varchar(200), label varchar(100), serving varchar(200), style  varchar(200))");
 		
 		// prepared statement
