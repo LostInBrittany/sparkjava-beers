@@ -1,6 +1,6 @@
-# Step 04 - Using a SQL DB #
+# Step 04 - Using a SQL DB 
 
-## Our initialization is ugly ##
+## Our initialization is ugly 
 
 Initializing the beers in the `Beer` class is not a nice way to do it, it's even one of the worse ways. In this step we are going to replace that procedure with a SQL database. If you already have a SQL database (MySQL, MariaDB...) in your computer, you can use it. If not, we are explaining here an alternative way using an embedded java database: [h2](http://www.h2database.com/).
 
@@ -82,7 +82,7 @@ We are going to use [h2](http://www.h2database.com/) as an *in-memory* database,
 		
 		
 		
-## So now we have a database, let\'s use it ##		
+## So now we have a database, let's use it 		
 		
 We are going to modify the loading of the beer list to use the database. We must change the `getBeers()` method in the `Beer` class to
 make it do a SQL `SELECT` request to recover the full list of beers:
