@@ -8,4 +8,5 @@ repositories {
 
 dependencies {
  	compile group: 'com.sparkjava', name: 'spark-core', version: '2.1'
+ 	compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
 }
