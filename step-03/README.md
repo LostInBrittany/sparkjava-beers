@@ -1,5 +1,7 @@
 # Step 03 #
 
+## Let's create the beer list ##
+
 We are going to take the beer list from the [angular-beers](https://github.com/LostInBrittany/angular-beers) project and serve it from the Spark server. 
 To do it, we begin by creating a `Beer` class that keeps the same information than the `Beer` JSON in JavaScript side.
 
@@ -65,4 +67,29 @@ Now we can use GSON to serialize the beer list into JSON:
        Gson gson = new Gson();
        String json = gson.toJson(beerList); 		
        
-       
+
+## Answering to the REST request ##
+
+And no we want our API to listen to the */BeerList* path and send back the JSON corresponding to the beer list. We create a `BeersAPI` class to pilot this feature:
+
+		package org.lostinbrittany.sparkjava.test;
+		
+		import static spark.Spark.get;
+		import java.util.List;
+		import org.lostinbrittany.sparkjava.test.model.Beer;
+		import com.google.gson.Gson;
+		
+		
+		public class BeersAPI {
+		
+		    public static void main(String[] args) {
+		        get("/BeerList", (request, response) -> {
+		        	List<Beer> beerList = Beer.getBeers();
+		        	Gson gson = new Gson();
+		        	String json = gson.toJson(beerList);  
+		        	return json;
+		        });
+		    }
+		}      
+		
+		

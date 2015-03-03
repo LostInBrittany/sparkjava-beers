@@ -1,10 +1,10 @@
-package org.lostinbrittany.sparkjava.test;
+package org.lostinbrittany.sparkjava.beers;
 
 import static spark.Spark.get;
 
 import java.util.List;
 
-import org.lostinbrittany.sparkjava.test.model.Beer;
+import org.lostinbrittany.sparkjava.beers.model.Beer;
 
 import com.google.gson.Gson;
 

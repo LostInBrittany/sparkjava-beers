@@ -1,4 +1,4 @@
-package org.lostinbrittany.sparkjava.test.model;
+package org.lostinbrittany.sparkjava.beers.model;
 
 import java.util.ArrayList;
 import java.util.List;
