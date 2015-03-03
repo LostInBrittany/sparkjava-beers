@@ -11,3 +11,15 @@ Follow this tutorial to learn to build APIs in Java quickly an easily, without a
 ## What do I need to use this tutorial
 
 You will need a web-browser and your favorite Java IDE (I can suggest [IntelliJ IDEA](https://www.jetbrains.com/idea/)  or [Eclipse](http://eclipse.org), but any other will do it). You will also need the [Gradle](http://gradle.org) build tool.
+
+## How is the tutorial organized ##
+
+As many computers used for the course haven't Git, we have structurated the project to allow a Git-less use. The `src` directory is the sources directory of the project, the working version of the code. The tutorial is divided in steps, each one in its own directory:
+
+1. [Empty project](./step-01/)
+1. [Installing Spark](./step-02/)
+1. [Using the `Beer` class](./step-03/)
+1. [Serving static resources](./step-04/)
+1. [Using a SQL DB](./step-05/)
+
+In each step directory you have a README file that explain the objective of the step, that you will do in the working directory `app`. If you have problems or if you get lost, you also have the solution of each step in the step directories. 
