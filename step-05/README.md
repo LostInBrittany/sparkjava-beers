@@ -81,3 +81,61 @@ We are going to use [h2](http://www.h2database.com/) as an *in-memory* database,
 		}	 	
 		
 		
+## So now we have a database, let's use it! ##		
+		
+We are going to modify the loading of the beer list to use the database. We must change the `getBeers()` method in the `Beer` class to
+make it do a SQL `SELECT` request to recover the full list of beers:
+
+
+
+		public class Beer {
+		
+			/*
+			 ...
+			 */
+		
+			public static List<Beer> getBeers() {
+		
+				ArrayList<Beer> list = new ArrayList<Beer>();
+				
+				 try
+			        {
+			            Class.forName("org.h2.Driver");
+			            Connection con = DriverManager.getConnection("jdbc:h2:mem:d1");
+			            Statement stmt = con.createStatement();
+			            
+			          //query to database
+						try {
+		
+							Beer beer;
+							ResultSet rs = stmt.executeQuery("SELECT * FROM beers");
+							while (rs.next()) {
+			 
+		
+								beer = new Beer();
+								beer.setId(rs.getString(1));
+								beer.setName(rs.getString(2));
+								beer.setImg(rs.getString(3));
+								beer.setDescription(rs.getString(4));
+								beer.setAlcohol(rs.getDouble(5));
+		
+					        	Gson gson = new Gson();
+					        	System.out.println(gson.toJson(beer));  
+					        	
+								list.add(beer);					
+							}
+							rs.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+		
+			            stmt.close();
+			            con.close();
+			        }
+			        catch( Exception e )
+			        {
+			            System.out.println( e.getMessage() );
+			        }  
+				 return list;
+			}
+		}		
