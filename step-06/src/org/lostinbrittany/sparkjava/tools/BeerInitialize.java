@@ -24,12 +24,14 @@ public class BeerInitialize {
 
 		try {
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("CREATE TABLE beers ( id varchar(50), name varchar(100), image varchar(100), description varchar(1000), alcohol decimal(3,1))");
+			stmt.executeUpdate("CREATE TABLE beers ( id varchar(50), name varchar(100), image varchar(100), description varchar(1000), alcohol decimal(3,1), "
+					+"availability varchar(100), brewery varchar(200), label varchar(100), serving varchar(200), style  varchar(200))");
 
 			logger.info("Table created");
 			// prepared statement
 			PreparedStatement prep = conn
-					.prepareStatement("INSERT INTO beers (id, name, image, description, alcohol) VALUES (?,?,?,?,?)");
+					.prepareStatement("INSERT INTO beers (id, name, image, description, alcohol, availability, brewery, label, serving, style)"
+							+"VALUES (?,?,?,?,?,?,?,?,?,?)");
 
 			for (Beer beer : BeerInitialize.getBeers()) {
 				prep.setString(1, beer.getId());
@@ -37,7 +39,11 @@ public class BeerInitialize {
 				prep.setString(3, beer.getImg());
 				prep.setString(4, beer.getDescription());
 				prep.setDouble(5, beer.getAlcohol());
-
+				prep.setString(6, beer.getAvailability());
+				prep.setString(7, beer.getBrewery());
+				prep.setString(8, beer.getLabel());
+				prep.setString(9, beer.getServing());
+				prep.setString(10, beer.getStyle());
 				// batch insert
 				prep.addBatch();
 
@@ -60,6 +66,11 @@ public class BeerInitialize {
 					beer.setImg(rs.getString(3));
 					beer.setDescription(rs.getString(4));
 					beer.setAlcohol(rs.getDouble(5));
+					beer.setAvailability(rs.getString(6));
+					beer.setBrewery(rs.getString(7));
+					beer.setLabel(rs.getString(8));
+					beer.setServing(rs.getString(9));
+					beer.setStyle(rs.getString(10));
 
 					Gson gson = new Gson();
 					System.out.println(gson.toJson(beer));
@@ -88,6 +99,11 @@ public class BeerInitialize {
 		beer.setId("AffligemBlond");
 		beer.setImg("img/AffligemBlond.jpg");
 		beer.setName("Affligem Blond");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Brasserie Affligem (Heineken)");
+		beer.setLabel("img/AffligemBlond-label.png");
+		beer.setServing("Serve in a Snifter");
+		beer.setStyle("Belgian-Style Blonde Ale");
 		list.add(beer);
 
 		beer = new Beer();
@@ -96,6 +112,11 @@ public class BeerInitialize {
 		beer.setId("AffligemDubbel");
 		beer.setImg("img/AffligemDubbel.jpg");
 		beer.setName("Affligem Dubbel");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Brasserie Affligem (Heineken)");
+		beer.setLabel("img/AffligemDubbel-label.png");
+		beer.setServing("Serve in a Snifter");
+		beer.setStyle("Belgian-Style Dubbel");
 		list.add(beer);
 
 		beer = new Beer();
@@ -104,6 +125,11 @@ public class BeerInitialize {
 		beer.setId("AffligemTripel");
 		beer.setImg("img/AffligemTripel.jpg");
 		beer.setName("Affligem Tripel");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Brasserie Affligem (Heineken)");
+		beer.setLabel("img/AffligemTripel-label.png");
+		beer.setServing("Serve in a Snifter");
+		beer.setStyle("Belgian-Style Tripel");
 		list.add(beer);
 
 		beer = new Beer();
@@ -112,6 +138,11 @@ public class BeerInitialize {
 		beer.setId("TrappistesRochefort6");
 		beer.setImg("img/TrappistesRochefort6.jpg");
 		beer.setName("Rochefort 6");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Rochefort Brewery (Brasserie de Rochefort)");
+		beer.setLabel("img/TrappistesRochefort6-label.png");
+		beer.setServing("Serve in a Snifter");
+		beer.setStyle("Trappiste");
 		list.add(beer);
 
 		beer = new Beer();
@@ -120,6 +151,11 @@ public class BeerInitialize {
 		beer.setId("TrappistesRochefort8");
 		beer.setImg("img/TrappistesRochefort8.jpg");
 		beer.setName("Rochefort 8");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Rochefort Brewery (Brasserie de Rochefort)");
+		beer.setLabel("img/TrappistesRochefort8-label.png");
+		beer.setServing("Serve in a Snifter");
+		beer.setStyle("Trappiste");
 		list.add(beer);
 
 		beer = new Beer();
@@ -128,6 +164,11 @@ public class BeerInitialize {
 		beer.setId("TrappistesRochefort10");
 		beer.setImg("img/TrappistesRochefort10.jpg");
 		beer.setName("Rochefort 10");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Rochefort Brewery (Brasserie de Rochefort)");
+		beer.setLabel("img/TrappistesRochefort10-label.png");
+		beer.setServing("Serve in a Goblet at Cellar - (12-14C/54-57F)");
+		beer.setStyle("Trappiste");
 		list.add(beer);
 
 		beer = new Beer();
@@ -136,6 +177,11 @@ public class BeerInitialize {
 		beer.setId("StBernardusPater6");
 		beer.setImg("img/StBernardusPater6.jpg");
 		beer.setName("St Bernardus Pater 6");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Brasserie St. Bernardus");
+		beer.setLabel("img/StBernardusPater6-label.png");
+		beer.setServing("Serve in a Snifter");
+		beer.setStyle("Belgian-Style Dubbel");
 		list.add(beer);
 
 		beer = new Beer();
@@ -144,6 +190,11 @@ public class BeerInitialize {
 		beer.setId("StBernardusTripel");
 		beer.setImg("img/StBernardusTripel.jpg");
 		beer.setName("St Bernardus Tripel");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Brasserie St. Bernardus");
+		beer.setLabel("img/StBernardusTripel-label.png");
+		beer.setServing("Serve in a Snifter");
+		beer.setStyle("Belgian-Style Tripel");
 		list.add(beer);
 
 		beer = new Beer();
@@ -152,6 +203,11 @@ public class BeerInitialize {
 		beer.setId("StBernardusAbt12");
 		beer.setImg("img/StBernardusAbt12.jpg");
 		beer.setName("St Bernardus Abt 12");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Brasserie St. Bernardus");
+		beer.setLabel("img/StBernardusAbt12-label.png");
+		beer.setServing("Serve in a Goblet at Cellar - (12-14C/54-57F)");
+		beer.setStyle("Fermentation haute");
 		list.add(beer);
 
 		beer = new Beer();
@@ -160,6 +216,11 @@ public class BeerInitialize {
 		beer.setId("ChimayRed");
 		beer.setImg("img/ChimayRed.jpg");
 		beer.setName("Chimay Rouge");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Bières de Chimay");
+		beer.setLabel("img/ChimayRed-label.png");
+		beer.setServing("Serve in a Snifter at Cool - (8-12C/45-54F)");
+		beer.setStyle("Belgian-Style Dubbel");
 		list.add(beer);
 
 		beer = new Beer();
@@ -168,6 +229,11 @@ public class BeerInitialize {
 		beer.setId("ChimayTriple");
 		beer.setImg("img/ChimayTriple.jpg");
 		beer.setName("Chimay Tripel");
+		beer.setAvailability("Year round");
+		beer.setBrewery("Bières de Chimay");
+		beer.setLabel("img/ChimayTriple-label.png");
+		beer.setServing("Serve in a Snifter at Cool - (8-12C/45-54F)");
+		beer.setStyle("Belgian-Style Tripel");
 		list.add(beer);
 
 		return list;

@@ -170,5 +170,18 @@ You can test it, for example, with the `localhost:4567/Beer/AffligemDubbel` URL:
  		>curl localhost:4567/Beer/AffligemDubbel
  		
 		{"name":"Affligem Dubbel","id":"AffligemDubbel","img":"img/AffligemDubbel.jpg","description":"A reddish-brown abbey ale brewed with dark malts. The secondary fermentation gives a fruity aroma and a unique spicy character with a distinctive aftertaste. Secondary fermentation in the bottle.","alcohol":6.8,"availability":"Year round","brewery":"Brasserie Affligem (Heineken)","label":"img/AffligemDubbel-label.png","serving":"Serve in a Snifter","style":"Belgian-Style Dubbel"}
+
+## Getting rid of JSON
+
+And now you can forget the JSON files by modifying the `BeerDetailsCtrl.js` file:
+
+		.controller('BeerDetailCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+		    $http.get('Beer/' + $routeParams.beerId).success(function(data) {
+		      $scope.beer = data;      
+		      $scope.mainImg = $scope.beer.img;
 		
-				
+		      $scope.setImage = function(img) {
+		        $scope.mainImg = img;
+		      }
+		    });		
+ 		 }]);		

@@ -59,6 +59,11 @@ public class BeersAPI {
 			String json = gson.toJson(beerList);
 			return json;
 		});
+		
+		get("/Beer/:beerId",(request, response) -> {
+			Gson gson = new Gson();
+			return gson.toJson(Beer.getBeer(request.params(":beerId"), conn));
+		});
 
 	}
 }

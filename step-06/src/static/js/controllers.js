@@ -13,7 +13,7 @@ angular
     $scope.orderProp = 'alcohol';
   }])
   .controller('BeerDetailCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
-    $http.get('beers/' + $routeParams.beerId + '.json').success(function(data) {
+    $http.get('Beer/' + $routeParams.beerId).success(function(data) {
       $scope.beer = data;      
       $scope.mainImg = $scope.beer.img;
 
