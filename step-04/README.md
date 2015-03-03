@@ -1,6 +1,6 @@
-# Step 04 - Serving static resources #
+# Step 04 - Serving static resources
 
-## We want to use Spark to serve the beer images ##
+## We want to use Spark to serve the beer images 
 
 Spark can also serve the static resources (images, HTML, CSS, JS...) of your application. To do it, you can assign a folder in the classpath serving static files with the `staticFileLocation` method. Note that the public directory name is not included in the URL. A file `/static/css/style.css` is made available as `http://{host}:{port}/css/style.css`
 
@@ -15,7 +15,7 @@ You can also assign an external folder (not in the classpath) serving static fil
 So now we can put our beer images inside `src/static/img/` and serve them with URLs like `{host}:{port}/img/AffligemTripel.jpg`.		 
 
 
-## Now we can make it serve also our HTML, CSS & JS, can't we? ##
+## Now we can make it serve also our HTML, CSS & JS, can't we? 
 
 Yes you can! Take a stable version of the [angular-beers](https://github.com/LostInBrittany/angular-beers) project (step 10 for example) and put it inside the static directory. Test it to see if it works... and it doesn't!
 

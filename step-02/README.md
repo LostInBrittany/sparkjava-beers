@@ -1,4 +1,4 @@
-# Step 02 #
+# Step 02 - Installing Spark
 
 We add Spark as a dependency for Gradle. To do it we need to define in the `build.gradle` file a *respository* (a source storing location when we will look for dependencies) and the dependency information for Spark:
 

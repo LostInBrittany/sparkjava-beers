@@ -1,4 +1,4 @@
-# Step 04 - Using a SQL DB 
+# Step 05 - Using a SQL DB 
 
 ## Our initialization is ugly 
 
