@@ -69,15 +69,13 @@ public class Beer {
 	}
 
 	
-	public static List<Beer> getBeers() {
+	public static List<Beer> getBeers(Connection conn) {
 
 		ArrayList<Beer> list = new ArrayList<Beer>();
 		
 		 try
 	        {
-	            Class.forName("org.h2.Driver");
-	            Connection con = DriverManager.getConnection("jdbc:h2:mem:d1");
-	            Statement stmt = con.createStatement();
+	            Statement stmt = conn.createStatement();
 	            
 	          //query to database
 				try {
@@ -105,7 +103,6 @@ public class Beer {
 				}
 
 	            stmt.close();
-	            con.close();
 	        }
 	        catch( Exception e )
 	        {

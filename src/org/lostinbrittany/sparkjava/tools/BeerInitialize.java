@@ -16,75 +16,67 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 public class BeerInitialize {
-	
+
 	public static Logger logger = LoggerFactory.getLogger(BeerInitialize.class);
 
-	public static void initBeerDb() {
+	public static void initBeerDb(Connection conn) {
 		logger.info("Ready to init DB");
-		
-		 try
-	        {
-	            Class.forName("org.h2.Driver");
-	            Connection con = DriverManager.getConnection("jdbc:h2:mem:d1");
-	            Statement stmt = con.createStatement();
-	            stmt.executeUpdate( "CREATE TABLE beers ( id varchar(50), name varchar(100), image varchar(100), description varchar(1000), alcohol decimal(3,1))" );	 
-	
-	            logger.info("Table created");
-	            //prepared statement
-				PreparedStatement prep = con.prepareStatement("INSERT INTO beers (id, name, image, description, alcohol) VALUES (?,?,?,?,?)");
-	 
-				
-	            for (Beer beer: BeerInitialize.getBeers()) {
-	            	prep.setString(1, beer.getId());
-	            	prep.setString(2, beer.getName());
-	            	prep.setString(3, beer.getImg());
-	            	prep.setString(4, beer.getDescription());
-					prep.setDouble(5, beer.getAlcohol());
-	 
-					//batch insert
-					prep.addBatch();
-	            	
-	            }
-				con.setAutoCommit(false);
-				prep.executeBatch();
-				con.setAutoCommit(true);
-	            
-			    logger.info("Ready to query");
-				//query to database
-				try {
 
-					Beer beer;
-					ResultSet rs = stmt.executeQuery("SELECT * FROM beers");
-					while (rs.next()) {
-	 
+		try {
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("CREATE TABLE beers ( id varchar(50), name varchar(100), image varchar(100), description varchar(1000), alcohol decimal(3,1))");
 
-						beer = new Beer();
-						beer.setId(rs.getString(1));
-						beer.setName(rs.getString(2));
-						beer.setImg(rs.getString(3));
-						beer.setDescription(rs.getString(4));
-						beer.setAlcohol(rs.getDouble(5));
+			logger.info("Table created");
+			// prepared statement
+			PreparedStatement prep = conn
+					.prepareStatement("INSERT INTO beers (id, name, image, description, alcohol) VALUES (?,?,?,?,?)");
 
-			        	Gson gson = new Gson();
-			        	System.out.println(gson.toJson(beer));  
-			        					
-					}
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			for (Beer beer : BeerInitialize.getBeers()) {
+				prep.setString(1, beer.getId());
+				prep.setString(2, beer.getName());
+				prep.setString(3, beer.getImg());
+				prep.setString(4, beer.getDescription());
+				prep.setDouble(5, beer.getAlcohol());
+
+				// batch insert
+				prep.addBatch();
+
+			}
+			conn.setAutoCommit(false);
+			prep.executeBatch();
+			conn.setAutoCommit(true);
+
+			logger.info("Ready to query");
+			// query to database
+			try {
+
+				Beer beer;
+				ResultSet rs = stmt.executeQuery("SELECT * FROM beers");
+				while (rs.next()) {
+
+					beer = new Beer();
+					beer.setId(rs.getString(1));
+					beer.setName(rs.getString(2));
+					beer.setImg(rs.getString(3));
+					beer.setDescription(rs.getString(4));
+					beer.setAlcohol(rs.getDouble(5));
+
+					Gson gson = new Gson();
+					System.out.println(gson.toJson(beer));
+
 				}
-				
-	            stmt.close();
-	            con.close();
-	        }
-	        catch( Exception e )
-	        {
-	            System.out.println( e.getMessage() );
-	            logger.error(e.getMessage(), e);
-	        }
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			stmt.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			logger.error(e.getMessage(), e);
+		}
 	}
-	
-	
+
 	private static List<Beer> getBeers() {
 		ArrayList<Beer> list = new ArrayList<Beer>();
 
@@ -180,5 +172,5 @@ public class BeerInitialize {
 
 		return list;
 	}
-	
+
 }
