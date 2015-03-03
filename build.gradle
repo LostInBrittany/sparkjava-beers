@@ -1,0 +1,13 @@
+apply plugin: 'eclipse'
+apply plugin: 'java'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+ 	compile group: 'com.sparkjava', name: 'spark-core', version: '2.1'
+ 	compile group: 'org.mongodb', name: 'mongo-java-driver', version: '2.11.3'
+ 	compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
+}
