@@ -8,9 +8,9 @@ Let's begin by adding the H2 dependency to our `build.gradle` and then executing
 
 
 		dependencies {
-		 	compile group: 'com.sparkjava', name: 'spark-core', version: '2.1'
-		 	compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
-		 	compile group: 'com.h2database', name: 'h2', version: '1.4.185'
+		 	compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
+		 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+		 	compile group: 'com.h2database', name: 'h2', version: '1.4.197'
 		}
 		
 We are going to use [h2](http://www.h2database.com/) as an *in-memory* database, i.e. a database where the data isn't written on disk, it remains in memory and when the application is shut down all the data is lost. With this configuration, we need a way to initialize the database at each restart of the application, we are creating an utility `BeerInitialize` class with a `initBeerDb` method:

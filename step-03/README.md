@@ -57,8 +57,8 @@ So now we have a nice Java list of beers. In order to send it to the client in o
 Let's begin by adding the GSON dependency to the `build.gradle` and actualize the dependencies by running `gradle eclipse`:
 
 		dependencies {
-		 	compile group: 'com.sparkjava', name: 'spark-core', version: '2.1'
-		 	compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
+		 	compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
+		 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
 		}   		
 		
 Now we can use GSON to serialize the beer list into JSON:
