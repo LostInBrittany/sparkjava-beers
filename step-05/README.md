@@ -9,6 +9,7 @@ Let's begin by adding the H2 dependency to our `build.gradle` and then executing
 
 		dependencies {
 		 	compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
+			compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'	
 		 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
 		 	compile group: 'com.h2database', name: 'h2', version: '1.4.197'
 		}
