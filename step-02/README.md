@@ -7,7 +7,7 @@ We add Spark as a dependency for Gradle. To do it we need to define in the `buil
 	}
 
 	dependencies {
-		compile group: 'com.sparkjava', name: 'spark-core', version: '2.1'
+		compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
 	}
 
 Then we can create a new class called `HelloWorld`  and add the following code to it:
