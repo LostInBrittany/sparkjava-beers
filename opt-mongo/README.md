@@ -130,5 +130,12 @@ And now `getBeerList`:
 On the `BeersAPI` change the route methods to call the DAO:
 
 ```java
+		get("/BeerList", (request, response) -> {
+			return BeerDAO.getBeerList();
+		});
+		
+		get("/Beer/:beerId",(request, response) -> {
+			return BeerDAO.getBeer(request.params(":beerId"));
+		});
 
 ```
