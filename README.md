@@ -20,6 +20,10 @@ As many computers used for the course haven't Git, we have structurated the proj
 1. [Installing Spark](./step-02/)
 1. [Using the `Beer` class](./step-03/)
 1. [Serving static resources](./step-04/)
-1. [Using a SQL DB](./step-05/)
+
+And two optional possibilities:
+
+- [Using a SQL DB 01](./opt-sql-01/)  and [Using a SQL DB 02](./opt-sql-01/)
+- [Using MongoDB](./opt-mongo/)
 
 In each step directory you have a README file that explain the objective of the step, that you will do in the working directory `app`. If you have problems or if you get lost, you also have the solution of each step in the step directories. 
