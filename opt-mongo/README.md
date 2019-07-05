@@ -1,6 +1,4 @@
-# Optional Step 1 
-
-# Step-06 : Mongo Beers
+# Optional Step: Mongo Beers
 
 Let's say you already have your beers in a MongoDB database. Now we are going to replace our local JSON files with calls to MongoDB.
 

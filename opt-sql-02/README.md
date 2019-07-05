@@ -1,4 +1,4 @@
-# Step 05 - Beer details
+# Optional Step - Beer details using a SQL DB 
 
 ## Let's restore beer details 
 
