@@ -71,7 +71,7 @@ Now we can use GSON to serialize the beer list into JSON:
 
 ## Answering to the REST request 
 
-And no we want our API to listen to the */BeerList* path and send back the JSON corresponding to the beer list. We create a `BeersAPI` class to pilot this feature:
+And now we want our API to listen to the */BeerList* path and send back the JSON corresponding to the beer list. We create a `BeersAPI` class to pilot this feature:
 
 		package org.lostinbrittany.sparkjava.test;
 		
