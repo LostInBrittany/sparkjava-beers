@@ -1,7 +1,7 @@
-package org.lostinbrittany.beers.dao;
+package org.lostinbrittany.sparkjava.beers.dao;
 
 import org.bson.Document;
-import org.lostinbrittany.beers.model.Beer;
+import org.lostinbrittany.sparkjava.beers.model.Beer;
 
 import com.google.gson.Gson;
 import com.mongodb.MongoClient;

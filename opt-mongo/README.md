@@ -29,6 +29,42 @@ compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.10.2'
 Don't forget to refresh your Gradle dependencies in Eclipse to make it recover
 the new dependencies from the  repository.
 
+## Enriching `Beer` to easy JSON marshalling
+
+GSON allow using annotations to mark object properties for, for example, conditional rendering.
+
+Let's add a `@Expose` annotation to the fields included in the beer list but not to those only in details:
+
+```java
+	@Expose private String name;
+	@Expose private String id;
+	@Expose private String img;
+	@Expose private String description;
+	@Expose private double alcohol;
+
+	private String availability;
+	private String brewery;
+	private String label;
+	private String serving;
+	private String style;
+```
+
+Now we can add two methods to serialize the object into JSON, one to serialize the object only with the exposed properties and another with all the properties:
+
+```java
+public String toJSONDetail() {
+	return gson.toJson(this);		
+}
+
+public String toJSON() {
+	final GsonBuilder builder = new GsonBuilder();
+		builder.excludeFieldsWithoutExposeAnnotation();
+		final Gson gsonShort = builder.create();
+	
+	return gsonShort.toJson(this);
+}
+```
+
 ## Create a `BeerDAO`
 
 We are going to create a DAO to deal with the Database.

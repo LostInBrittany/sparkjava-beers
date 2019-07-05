@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.gson.Gson;
  
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 
 public class Beer {
 
@@ -22,13 +23,12 @@ public class Beer {
 	 * "Affligem Blond" }
 	 */
 
-	private String name;
-	private String id;
-	private String img;
-	private String description;
-	private double alcohol;
-	
-	
+
+	@Expose private String name;
+	@Expose private String id;
+	@Expose private String img;
+	@Expose private String description;
+	@Expose private double alcohol;
 
 	private String availability;
 	private String brewery;
@@ -116,5 +116,18 @@ public class Beer {
 		this.style = style;
 	}
 
+
+	public static final Gson gson = new Gson();
 	
+	public String toJSONDetail() {
+		return gson.toJson(this);		
+	}
+	
+	public String toJSON() {
+		final GsonBuilder builder = new GsonBuilder();
+	    builder.excludeFieldsWithoutExposeAnnotation();
+	    final Gson gsonShort = builder.create();
+		
+		return gsonShort.toJson(this);
+	}
 }
