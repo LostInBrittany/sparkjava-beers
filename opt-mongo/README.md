@@ -29,45 +29,6 @@ compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.10.2'
 Don't forget to refresh your Gradle dependencies in Eclipse to make it recover
 the new dependencies from the  repository.
 
-## Connecting to Mongo
-
-Now in our `BeersAPI` file we create methods to open and close a connection:
-
-```java
-private static MongoClient mongoClient;
-private static MongoDatabase database;
-
-private static void initDB() {
-  try {
-    mongoClient = new MongoClient();		
-    database = mongoClient.getDatabase("beers");		
-    collection = database.getCollection("beers");
-  } catch (Exception e) {
-    System.out.println(e.getMessage());
-    logger.error(e.getMessage(), e);
-  }
-}
-
-private static void closeDb() {
-
-  try {
-    mongoClient.close();
-  } catch (Exception e) {
-    System.out.println(e.getMessage());
-    logger.error(e.getMessage(), e);
-  }
-}
-```
-
-And in the `main()` method, we call `initDB()`:
-
-```java
-	public static void main(String[] args) {
-    initDB();
-    [...]
-  }
-```
-
 ## Create a `BeerDAO`
 
 We are going to create a DAO to deal with the Database.
@@ -125,5 +86,10 @@ And now `getBeerList`:
 }
 ```
 
-# Call the DAO from the API
+## Call the DAO from the API
 
+On the `BeersAPI` change the route methods to call the DAO:
+
+```java
+
+```
