@@ -52,6 +52,8 @@ Let's add a `@Expose` annotation to the fields included in the beer list but not
 Now we can add two methods to serialize the object into JSON, one to serialize the object only with the exposed properties and another with all the properties:
 
 ```java
+public static final Gson gson = new Gson();
+
 public String toJSONDetail() {
 	return gson.toJson(this);		
 }
@@ -74,6 +76,7 @@ Our DAO will have two methods, `getBeer` to get info on one beer, and `getBeerLi
 Let's begin with `getBeer`:
 
 ```java
+
 	public static String getBeer(String id) {
 
 		MongoClient mongoClient = new MongoClient();
