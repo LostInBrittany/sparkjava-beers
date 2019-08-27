@@ -1,8 +1,8 @@
 # Sparkjava-Beers 
 
-## A server-side companion to the [angular-beers](https://github.com/LostInBrittany/angular-beers) project
+## A server-side companion to the \*.beers projects 
 
-The [angular-beers](https://github.com/LostInBrittany/angular-beers) project is a small [AngularJS](http://angularjs.org) tutorial that can be used on its own. But IMHO it is a pity to do only the client-side and mocking the server API with plain files. So here we have a companion project where we are going to do the server-side of [angular-beers](https://github.com/LostInBrittany/angular-beers) using [Spark](http://sparkjava.com/), tiny [Sinatra](http://www.sinatrarb.com/) inspired framework for creating web applications in Java 8 with minimal effort.
+My different Beers tutorials ([Angular Beers](https://github.com/LostInBrittany/angular-beers), [Vue Beers](https://github.com/LostInBrittany/vue-beers), [Lit-Element Beers](https://github.com/LostInBrittany/lit-element-beers) are standalone, they can be used without any backend.But IMHO it is a pity to do only the client-side and mocking the server API with plain files. So here we have a companion project where we are going to do the server-side of [angular-beers](https://github.com/LostInBrittany/angular-beers) using [Spark](http://sparkjava.com/), tiny [Sinatra](http://www.sinatrarb.com/) inspired framework for creating web applications in Java 8 with minimal effort.
 
 ## What are the objectives of this tutorial
 
