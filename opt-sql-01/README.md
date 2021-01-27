@@ -71,65 +71,64 @@ public class BeersAPI {
 
 
 `BeerInitialize.java`:
+```java
+public static void initBeerDb(Connection conn) {
+logger.info("Ready to init DB");
 
+try {
+	Statement stmt = conn.createStatement();
+	stmt.executeUpdate("CREATE TABLE beers ( id varchar(50), name varchar(100), image varchar(100), description varchar(1000), alcohol decimal(3,1))");
 
-	public static void initBeerDb(Connection conn) {
-		logger.info("Ready to init DB");
+	logger.info("Table created");
+	// prepared statement
+	PreparedStatement prep = conn
+			.prepareStatement("INSERT INTO beers (id, name, image, description, alcohol) VALUES (?,?,?,?,?)");
 
-		try {
-			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("CREATE TABLE beers ( id varchar(50), name varchar(100), image varchar(100), description varchar(1000), alcohol decimal(3,1))");
+	for (Beer beer : BeerInitialize.getBeers()) {
+		prep.setString(1, beer.getId());
+		prep.setString(2, beer.getName());
+		prep.setString(3, beer.getImg());
+		prep.setString(4, beer.getDescription());
+		prep.setDouble(5, beer.getAlcohol());
 
-			logger.info("Table created");
-			// prepared statement
-			PreparedStatement prep = conn
-					.prepareStatement("INSERT INTO beers (id, name, image, description, alcohol) VALUES (?,?,?,?,?)");
+		// batch insert
+		prep.addBatch();
 
-			for (Beer beer : BeerInitialize.getBeers()) {
-				prep.setString(1, beer.getId());
-				prep.setString(2, beer.getName());
-				prep.setString(3, beer.getImg());
-				prep.setString(4, beer.getDescription());
-				prep.setDouble(5, beer.getAlcohol());
+	}
+	conn.setAutoCommit(false);
+	prep.executeBatch();
+	conn.setAutoCommit(true);
 
-				// batch insert
-				prep.addBatch();
+	logger.info("Ready to query");
+	// query to database
+	try {
 
-			}
-			conn.setAutoCommit(false);
-			prep.executeBatch();
-			conn.setAutoCommit(true);
+		Beer beer;
+		ResultSet rs = stmt.executeQuery("SELECT * FROM beers");
+		while (rs.next()) {
 
-			logger.info("Ready to query");
-			// query to database
-			try {
+			beer = new Beer();
+			beer.setId(rs.getString(1));
+			beer.setName(rs.getString(2));
+			beer.setImg(rs.getString(3));
+			beer.setDescription(rs.getString(4));
+			beer.setAlcohol(rs.getDouble(5));
 
-				Beer beer;
-				ResultSet rs = stmt.executeQuery("SELECT * FROM beers");
-				while (rs.next()) {
+			Gson gson = new Gson();
+			System.out.println(gson.toJson(beer));
 
-					beer = new Beer();
-					beer.setId(rs.getString(1));
-					beer.setName(rs.getString(2));
-					beer.setImg(rs.getString(3));
-					beer.setDescription(rs.getString(4));
-					beer.setAlcohol(rs.getDouble(5));
-
-					Gson gson = new Gson();
-					System.out.println(gson.toJson(beer));
-
-				}
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			stmt.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			logger.error(e.getMessage(), e);
 		}
-		
+		rs.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+	stmt.close();
+} catch (Exception e) {
+	System.out.println(e.getMessage());
+	logger.error(e.getMessage(), e);
+}
+```		
 		
 		
 ## So now we have a database, let's use it 		
@@ -139,51 +138,52 @@ make it do a SQL `SELECT` request to recover the full list of beers:
 
 
 `Beer.java`:
+```java
+public class Beer {
 
-		public class Beer {
-		
-			/*
-			 ...
-			 */
-		
-			public static List<Beer> getBeers(Connection conn) {
+	/*
+		...
+		*/
+
+	public static List<Beer> getBeers(Connection conn) {
+
+	ArrayList<Beer> list = new ArrayList<Beer>();
 	
-			ArrayList<Beer> list = new ArrayList<Beer>();
+		try
+		{
+			Statement stmt = conn.createStatement();
 			
-			 try
-		        {
-		            Statement stmt = conn.createStatement();
-		            
-		          //query to database
-					try {
+			//query to database
+			try {
+
+				Beer beer;
+				ResultSet rs = stmt.executeQuery("SELECT * FROM beers");
+				while (rs.next()) {
 	
-						Beer beer;
-						ResultSet rs = stmt.executeQuery("SELECT * FROM beers");
-						while (rs.next()) {
-		 
-	
-							beer = new Beer();
-							beer.setId(rs.getString(1));
-							beer.setName(rs.getString(2));
-							beer.setImg(rs.getString(3));
-							beer.setDescription(rs.getString(4));
-							beer.setAlcohol(rs.getDouble(5));
-	
-				        	Gson gson = new Gson();
-				        	System.out.println(gson.toJson(beer));  
-				        	
-							list.add(beer);					
-						}
-						rs.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-	
-		            stmt.close();
-		        }
-		        catch( Exception e )
-		        {
-		            System.out.println( e.getMessage() );
-		        }  
-			 return list;
-		}	
+
+					beer = new Beer();
+					beer.setId(rs.getString(1));
+					beer.setName(rs.getString(2));
+					beer.setImg(rs.getString(3));
+					beer.setDescription(rs.getString(4));
+					beer.setAlcohol(rs.getDouble(5));
+
+					Gson gson = new Gson();
+					System.out.println(gson.toJson(beer));  
+					
+					list.add(beer);					
+				}
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			stmt.close();
+		}
+		catch( Exception e )
+		{
+			System.out.println( e.getMessage() );
+		}  
+		return list;
+}
+```	
