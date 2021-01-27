@@ -18,10 +18,14 @@ Then we can create a new class called `HelloWorld`  and add the following code t
 ```java
 package org.lostinbrittany.sparkjava.test;
 
+
 import static spark.Spark.*;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
 public class HelloWorld {
-	
+
 	public static void main(String[] args) {
 		get("/", new Route() {
 			@Override
@@ -30,7 +34,9 @@ public class HelloWorld {
 			}
 		});
 	}
+
 }
+
 ```
 
 This code:

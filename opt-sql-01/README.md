@@ -6,66 +6,67 @@ Initializing the beers in the `Beer` class is not a nice way to do it, it's even
 
 Let's begin by adding the H2 dependency to our `build.gradle` and then executing `gradle eclipse`:
 
-
-		dependencies {
-		 	compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
-			compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'	
-		 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
-		 	compile group: 'com.h2database', name: 'h2', version: '1.4.197'
-		}
+```java
+dependencies {
+	compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
+	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'	
+	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+	compile group: 'com.h2database', name: 'h2', version: '1.4.197'
+}
+```
 		
 We are going to use [h2](http://www.h2database.com/) as an *in-memory* database, i.e. a database where the data isn't written on disk, it remains in memory and when the application is shut down all the data is lost. With this configuration, we need a way to initialize the database at each restart of the application, we are creating an utility `BeerInitialize` class with a `initBeerDb` method:
 
 `BeersAPI.java`
 
+```java
+package org.lostinbrittany.sparkjava.beers;
 
-		package org.lostinbrittany.sparkjava.beers;
+/*
+	...
+	*/
+
+public class BeersAPI {
+
+	public static Logger logger = LoggerFactory.getLogger(BeersAPI.class);
+
+	private static Connection conn;
+
+	private static void initDB() {
+
+		try {
+			Class.forName("org.h2.Driver");
+			conn = DriverManager.getConnection("jdbc:h2:mem:d1");
+
+			BeerInitialize.initBeerDb(conn);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			logger.error(e.getMessage(), e);
+		}
+	}
+
+	private static void closeDb() {
+
+		try {
+			conn.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			logger.error(e.getMessage(), e);
+		}
+	}
+
+	public static void main(String[] args) {
+
+		initDB();
 		
 		/*
-		 ...
-		 */
-		
-		public class BeersAPI {
-		
-			public static Logger logger = LoggerFactory.getLogger(BeersAPI.class);
-		
-			private static Connection conn;
-		
-			private static void initDB() {
-		
-				try {
-					Class.forName("org.h2.Driver");
-					conn = DriverManager.getConnection("jdbc:h2:mem:d1");
-		
-					BeerInitialize.initBeerDb(conn);
-		
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					logger.error(e.getMessage(), e);
-				}
-			}
-		
-			private static void closeDb() {
-		
-				try {
-					conn.close();
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					logger.error(e.getMessage(), e);
-				}
-			}
-		
-			public static void main(String[] args) {
-		
-				initDB();
-				
-				/*
-				 ...
-				 */
-		
-			}
-		}
+			...
+			*/
 
+	}
+}
+```
 
 
 
