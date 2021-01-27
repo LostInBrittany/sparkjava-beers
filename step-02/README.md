@@ -2,33 +2,37 @@
 
 We add Spark as a dependency for Gradle. To do it we need to define in the `build.gradle` file a *respository* (a source storing location when we will look for dependencies) and the dependency information for Spark:
 
-	repositories {
-    	mavenCentral()
-	}
+```groovy
+repositories {
+	mavenCentral()
+}
 
-	dependencies {
-		compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
-		compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'		
-	}
+dependencies {
+	compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
+	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'		
+}
+```
 
 Then we can create a new class called `HelloWorld`  and add the following code to it:
 
-	package org.lostinbrittany.sparkjava.test;
+```java
+package org.lostinbrittany.sparkjava.test;
+
+import static spark.Spark.*;
+
+public class HelloWorld {
 	
-	import static spark.Spark.*;
-	
-	public class HelloWorld {
-		
-	    public static void main(String[] args) {
-	        get("/", new Route() {
-	            @Override
-	            public Object handle(Request request, Response response) {
-	                return "Hello World!!";
-	            }
-	        });
-	    }
+	public static void main(String[] args) {
+		get("/", new Route() {
+			@Override
+			public Object handle(Request request, Response response) {
+				return "Hello World!!";
+			}
+		});
 	}
-	
+}
+```
+
 This code:
 
 * Imports the required classes from the Spark library.
@@ -39,15 +43,16 @@ To see the application in action, run the main program using your IDE. The appli
 
 Take advantage of Java 8 lambda expressions to make your code more concise and clean. Spark is a modern Java web framework that takes advantage of Java 8 features.	
 
-	package org.lostinbrittany.sparkjava.test;
-	
-	import static spark.Spark.*;
-	
-	public class HelloWorld {
-		
-	    public static void main(String[] args) {
-	        get("/", (request, response) -> "Hello World");
-	    }
-	}
+```java
+package org.lostinbrittany.sparkjava.test;
 
+import static spark.Spark.*;
+
+public class HelloWorld {
+	
+	public static void main(String[] args) {
+		get("/", (request, response) -> "Hello World");
+	}
+}
+```
 
