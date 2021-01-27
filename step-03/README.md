@@ -11,8 +11,8 @@ package org.lostinbrittany.sparkjava.test.model;
 public class Beer {
 	
 	/*
-		...
-		*/
+	...
+	*/
 	
 	private String name;
 	private String id;
@@ -21,8 +21,8 @@ public class Beer {
 	private double alcohol;
 		
 	/*
-		...
-		*/
+	...
+	*/
 }
 ```
 
@@ -44,10 +44,10 @@ public static List<Beer> getBeers() {
 	list.add(beer);
 	
 	/*
-		...
-		*/
+	...
+	*/
 		
-		return list;
+	return list;
 }
 ```   		
    		
@@ -96,6 +96,7 @@ public class BeersAPI {
 			return json;
 		});
 	}
+	
 }      
 ```		
 		

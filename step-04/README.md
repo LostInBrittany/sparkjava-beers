@@ -4,18 +4,23 @@
 
 Spark can also serve the static resources (images, HTML, CSS, JS...) of your application. To do it, you can assign a folder in the classpath serving static files with the `staticFile.location` method. Note that the public directory name is not included in the URL. A file `/static/css/style.css` is made available as `http://{host}:{port}/css/style.css`
 
-		staticFile.location("/static"); // Static files
-		
+```java
+staticFile.location("/static"); // Static files
+```		
 In your project you should put the `static` directory inside `src`.		
 		
 You can also assign an external folder (not in the classpath) serving static files with the externalStaticFileLocation method.
 
-		staticFile.externalLocation("/var/www/public"); // Static files
+```java
+staticFile.externalLocation("/var/www/public"); // Static files
+```
 
 So now we can put our beer images inside `src/static/img/` and serve them with URLs like `{host}:{port}/img/AffligemTripel.jpg`.		 
 
 
 ## Now we can make it serve also our HTML, CSS & JS, can't we? 
+
+> If you have already done any of the frontend *Beer Tutorials* ([Stencil Beers](https://github.com/LostInBrittany/stencil-beers/), [Vue Beers](https://github.com/LostInBrittany/vue-beers), [LitElement Beers](https://github.com/LostInBrittany/lit-element-beers)...) please use your own version instead of the  [angular-beers](https://github.com/LostInBrittany/angular-beers) adviced below.
 
 Yes you can! Take a stable version of the [angular-beers](https://github.com/LostInBrittany/angular-beers) project (step 10 for example) and put it inside the static directory. Test it to see if it works... and it doesn't!
 
