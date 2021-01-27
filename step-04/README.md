@@ -7,7 +7,7 @@ Spark can also serve the static resources (images, HTML, CSS, JS...) of your app
 ```java
 staticFile.location("/static"); // Static files
 ```		
-In your project you should put the `static` directory inside `src`.		
+In your project you should put the `static` directory inside `src/main/resources`.		
 		
 You can also assign an external folder (not in the classpath) serving static files with the externalStaticFileLocation method.
 
